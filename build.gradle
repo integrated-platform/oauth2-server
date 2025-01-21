@@ -1,0 +1,40 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '3.4.1'
+	id 'io.spring.dependency-management' version '1.1.7'
+}
+
+group = 'oauth2-server'
+version = '0.0.1-SNAPSHOT'
+
+java {
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(17)
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	// OAuth2 인증 서버 의존성
+	implementation 'org.springframework.boot:spring-boot-starter-oauth2-authorization-server'
+
+	// 기본 보안 기능 제공 의존성
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+
+	// OAuth2와 관련된 핵심 기능 의존성
+	implementation 'org.springframework.security:spring-security-oauth2-core'
+
+	// 필요한 경우, 사용자 데이터 저장을 위한 JPA 의존성
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+
+	// 테스트 의존성
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
